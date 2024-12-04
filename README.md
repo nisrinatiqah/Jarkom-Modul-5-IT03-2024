@@ -1,4 +1,4 @@
-# Laporan Resmi Praktikum Jarkom Modul 4 2024
+# Laporan Resmi Praktikum Jarkom Modul 5 2024
 
 ---
 
@@ -15,11 +15,12 @@
 - [Pembagian IP VLSM](#pembagian-ip-vlsm)
 - [Konfigurasi](#konfigurasi)
 - [Misi 1](#misi-1)
-  - Soal 4
+  - [Soal 4](#soal-4)
 - [Misi 2](#misi-2)
-  - Soal 1
-  - Soal 2
-  - Soal 3
+  - [Soal 1](#soal-1)
+  - [Soal 2](#soal-2)
+  - [Soal 3](#soal-3)
+  - [Soal 4](#soal-4)
 
 ## Topologi
   ![Bapak anda drawio](https://github.com/user-attachments/assets/9fe683d2-c4ae-4988-ab92-46389bdc29f4)
@@ -391,6 +392,7 @@ iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source $ETH0_IP
 iptables -A INPUT -p icmp --icmp-type echo-request -j DROP 
 iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT 
 ```
+Testing
 - Fairy ke node lain (bisa)
 
   <img width="461" alt="Screenshot 2024-12-04 063342" src="https://github.com/user-attachments/assets/88ac4603-d495-47c6-8c72-3bae5b91c934">
@@ -400,3 +402,37 @@ iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
   <img width="464" alt="Screenshot 2024-12-04 064120" src="https://github.com/user-attachments/assets/b28e50a5-b7b4-4b01-98c4-adebb469e59b">
 
 ### Soal 3
+   Selain itu, agar kejadian sebelumnya tidak terulang, hanya Fairy yang dapat mengakses HDD. Gunakan nc (netcat) untuk memastikan akses ini. [hapus aturan iptables setelah pengujian selesai agar internet tetap dapat diakses.]
+>HDD/hdd3.sh
+ ```
+  iptables -P INPUT DROP
+  iptables -A INPUT -s 10.65.1.202 -j ACCEPT
+  ```
+Testing
+- Jalankan di Fairy & node lain
+  ```
+  echo "Dari (node)" | nc 10.65.1.203 1234
+  ```
+  <img width="356" alt="Screenshot 2024-12-04 170254" src="https://github.com/user-attachments/assets/3b18043f-2228-47a7-be1b-b2f0a9432511">
+
+  <img width="442" alt="Screenshot 2024-12-04 170021" src="https://github.com/user-attachments/assets/5f6167af-8729-464e-a293-7d183e6a43ab">
+
+- Cek di HDD
+  ```
+  nc -l -p 1234
+  ```
+  <img width="309" alt="Screenshot 2024-12-04 170315" src="https://github.com/user-attachments/assets/a5a395be-0a1b-48ca-9299-ab9a5ed03d1c">
+
+### Soal 4
+   Fairy mendeteksi aktivitas mencurigakan di server Hollow. Namun, berdasarkan peraturan polisi New Eridu, Hollow hanya boleh diakses pada hari Senin hingga Jumat dan hanya oleh faksi SoC (Burnice & Caesar) dan PubSec (Jane & Policeboo). Karena hari ini hari Sabtu, mereka harus menunggu hingga hari Senin. Gunakan curl untuk memastikan akses ini.
+>HollowZero/hollowzero4.sh
+  ```
+iptables -P INPUT DROP
+#Burnice & Caesar
+iptables -A INPUT -s 10.65.1.128/26 -m time --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+#Jane & Policeboo
+iptables -A INPUT -s 10.65.0.0/24 -m time --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+  ```
+<img width="713" alt="Screenshot 2024-12-04 174811" src="https://github.com/user-attachments/assets/25f5e57d-632b-4716-b383-0003826eba13">
+
+<img width="507" alt="Screenshot 2024-12-04 174757" src="https://github.com/user-attachments/assets/5ec81c89-1a48-4d8b-9896-03cd1673c9aa">
