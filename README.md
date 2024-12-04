@@ -22,7 +22,8 @@
   - Soal 3
 
 ## Topologi
-  ![WhatsApp Image 2024-12-01 at 20 19 44_f8bdf508](https://github.com/user-attachments/assets/42fec390-de12-41b7-a2c8-c35c0aa9c588)
+  ![Bapak anda drawio](https://github.com/user-attachments/assets/9fe683d2-c4ae-4988-ab92-46389bdc29f4)
+
 
 ## Rute  
   https://docs.google.com/spreadsheets/d/13zPTL2jgMoY6ygcwE4Qbuzff5Y9avR5I0j0EcIDCU6g/edit?usp=sharing 
